@@ -23,8 +23,8 @@ def resultaatlooper(resultaatproduct, productlijst):                    #Hier ch
             productlijst.append(product)
         if len(productlijst) == 11:
             break
-    if len(productlijst) > 3:                                           #productlijst is hoeveel producten dit persoon heeft bekeken, alleen zitten hier profielid en segment al in. Waardoor het limiet op 3 moet zitten
-        while len(productlijst) != 12:                                  #Het limiet zit op 3 om te zorgen dat mensen die 2 producten hebben bekeken alleen inzitten
+    if len(productlijst) > 3:                                           #productlijst is hoeveel producten dit persoon heeft bekeken, alleen zitten hier profielid en segment al in. Waardoor het limiet op 3 moet zitten.
+        while len(productlijst) != 12:                                  #Het limiet zit op 3 om te zorgen dat mensen die 2 producten hebben bekeken alleen inzitten. Dit zou kunnen worden verlaagd naar 1 product als de scope groter is dan 500.
             productlijst.append("null")                                 #om te zorgen dat alles ingevuld wordt, ook al maak ik het nullable. Om crashes te voorkomen vul ik de overige aan met null
         mySql_insert_query3 = "INSERT INTO profielgezien (profid, kindofcust, recommendsforitem1, recommendsforitem2, recommendsforitem3, recommendsforitem4, recommendsforitem5, recommendsforitem6, recommendsforitem7, recommendsforitem8, recommendsforitem9, recommendsforitem10) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(mySql_insert_query3, (tuple(productlijst)))      #Liefst wou ik alle MySQL queries buiten de main code halen, als dat geen problemen zou leveren was dat gebeurt. Echter een hele hoop errors later werkt dat niet.
